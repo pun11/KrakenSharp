@@ -39,12 +39,15 @@ namespace KrakenSharp.WebSockets
 
         public const int DEFAULT_AWAIT_TIMEOUT = 15000;
 
+        #region Events
+
         public event EventHandler<RawKrakenMessage> MessageReceived;
 
         public event EventHandler<Heartbeat> HeartbeatReceived;
         public event EventHandler<SystemStatusResponse> SystemStatusChanged;
         public event EventHandler<SubscriptionStatusResponse> SubscriptionStatusChanged;
         public event EventHandler<PongMessage> PongReceived;
+        #endregion
 
         #region Fields
 
@@ -101,14 +104,14 @@ namespace KrakenSharp.WebSockets
 
         public Task Connect(CancellationToken token = default(CancellationToken))
         {
-            try
+            try 
             {
                 return _socket.ConnectAsync(token);
             }
             catch (Exception ex)
             {
                 Logger?.LogError(ex, "Failed to Open Connection.");
-                throw ex;
+                throw;
             }
         }
 
@@ -121,7 +124,7 @@ namespace KrakenSharp.WebSockets
             catch (Exception ex)
             {
                 Logger?.LogError(ex, "Failed to Close Connection.");
-                throw ex;
+                throw;
             }
         }
 
@@ -136,7 +139,7 @@ namespace KrakenSharp.WebSockets
             catch (Exception ex)
             {
                 Logger?.LogError(ex, "Failed to Subscribe for {@subscription}", subscription);
-                throw ex;
+                throw;
             }
         }
 
@@ -181,12 +184,12 @@ namespace KrakenSharp.WebSockets
             }
             catch (OperationCanceledException cex)
             {
-                throw cex;
+                throw;
             }
             catch (Exception ex)
             {
                 Logger?.LogError(ex, "Failed to Subscribe for {@subscription}", subscription);
-                throw ex;
+                throw;
             }
             finally
             {
@@ -204,7 +207,7 @@ namespace KrakenSharp.WebSockets
             catch(Exception ex)
             {
                 Logger?.LogError(ex, "Failed to Unsubscribe {channelId}.", channelId);
-                throw ex;
+                throw;
             }
         }
 
@@ -217,7 +220,7 @@ namespace KrakenSharp.WebSockets
             catch (Exception ex)
             {
                 Logger?.LogError(ex, "Failed to Ping server.");
-                throw ex;
+                throw;
             }
         }
 
@@ -242,12 +245,12 @@ namespace KrakenSharp.WebSockets
             }
             catch (OperationCanceledException cex)
             {
-                throw cex;
+                throw;
             }
             catch (Exception ex)
             {
                 Logger?.LogError(ex, "Failed to Ping server.");
-                throw ex;
+                throw;
             }
             finally
             {
@@ -512,7 +515,7 @@ namespace KrakenSharp.WebSockets
             catch (Exception ex)
             {
                 Logger?.LogError(ex, "Fatal Error attempting to add order: {@cmnd}.", cmnd);
-                throw ex;
+                throw;
             }
         }
 
@@ -541,12 +544,12 @@ namespace KrakenSharp.WebSockets
             }
             catch(OperationCanceledException cex)
             {
-                throw cex;
+                throw;
             }
             catch (Exception ex)
             {
                 Logger?.LogError(ex, "Fatal Error attempting to add order: {@cmnd}.", cmnd);
-                throw ex;
+                throw;
             }
             finally
             {
@@ -566,7 +569,7 @@ namespace KrakenSharp.WebSockets
             catch (Exception ex)
             {
                 Logger?.LogError(ex, "Fatal Error attempting to cancel order: {@cmnd}.", cmnd);
-                throw ex;
+                throw;
             }
         }
 
@@ -595,12 +598,12 @@ namespace KrakenSharp.WebSockets
             }
             catch (OperationCanceledException cex)
             {
-                throw cex;
+                throw;
             }
             catch (Exception ex)
             {
                 Logger?.LogError(ex, "Fatal Error attempting to cancel order: {@cmnd}.", cmnd);
-                throw ex;
+                throw;
             }
             finally
             {
@@ -642,12 +645,12 @@ namespace KrakenSharp.WebSockets
             }
             catch (OperationCanceledException cex)
             {
-                throw cex;
+                throw;
             }
             catch (Exception ex)
             {
                 Logger?.LogError(ex, "Fatal Error attempting to cancel all orders: {@cmnd}.", cmnd);
-                throw ex;
+                throw;
             }
             finally
             {
@@ -689,12 +692,12 @@ namespace KrakenSharp.WebSockets
             }
             catch (OperationCanceledException cex)
             {
-                throw cex;
+                throw;
             }
             catch (Exception ex)
             {
                 Logger?.LogError(ex, "Fatal Error attempting to cancel all orders: {@cmnd}.", cmnd);
-                throw ex;
+                throw;
             }
             finally
             {
